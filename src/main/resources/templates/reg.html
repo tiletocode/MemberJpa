@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>등록</title>
+  <link rel="stylesheet" th:href="@{css/style.css}">
+</head>
+<body>
+<div id="wrap">
+
+  <div id="menu">
+    <div class="container">
+      <div id="nav">
+        <ul>
+          <li><a href="/list">회원목록</a></li>
+        </ul>
+      </div>
+
+      <div id="page_title">
+        <h2 th:text="${title}">등록</h2>
+      </div>
+    </div>
+  </div>
+  <div id="main" class="container">
+    <p class="error-msg" th:if="${message} != null" th:text="${message}"></p>
+    <form th:action="${memberForm.newMember}? @{/insert} : @{/update}" method="post" th:object="${memberForm}">
+      <input type="hidden" name="num" th:value="*{num}">
+      <table class="input-table">
+        <tr>
+          <th>회원ID</th>
+          <td>
+            <input type="text" name="id" th:value="*{id}" th:errorclass="error-msg">
+            <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" th:errorclass="error-msg"></p>
+          </td>
+        </tr>
+        <tr>
+          <th>비밀번호</th>
+          <td>
+            <input type="password" name="pass" th:value="*{pass}" th:errorclass="error-msg">
+            <p th:if="${#fields.hasErrors('pass')}" th:errors="*{pass}" th:errorclass="error-msg"></p>
+          </td>
+        </tr>
+        <tr>
+          <th>회원명</th>
+          <td>
+            <input type="text" name="name" th:value="*{name}" th:errorclass="error-msg">
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="error-msg"></p>
+          </td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>
+            <input type="text" name="email" th:value="*{email}" th:errorclass="error-msg">
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error-msg"></p>
+          </td>
+        </tr>
+      </table>
+
+      <input type="submit" value="등록">
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

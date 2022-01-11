@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원목록</title>
+  <link rel="stylesheet" th:href="@{css/style.css}">
+</head>
+<body>
+<div id="wrap">
+  <div id="menu">
+    <div class="container">
+      <div id="nav">
+        <ul>
+          <li><a href="/insert">회원가입</a></li>
+        </ul>
+      </div>
+
+      <div id="page_title">
+        <h2 th:text="${title}">회원목록</h2>
+      </div>
+    </div>
+  </div>
+
+  <div id="main" class="container">
+    <table class="list-table">
+      <thead>
+      <tr>
+        <th>회원번호</th>
+        <th>회원ID</th>
+        <th>회원명</th>
+        <th>이메일</th>
+        <th></th>
+
+      </tr>
+      <tbody th:if="${memberList.size() >= 1}">
+      <tr th:each="member: ${memberList}" th:object="${member}">
+        <td th:text="*{num}"></td>
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{email}"></td>
+        <td>
+          <form method="get" th:action="@{/{num}(num=${member.num})}">
+            <input type="submit" value="수정">
+          </form>
+          <form method="post" th:action="@{/delete}">
+            <input type="hidden" name="num" th:value="${member.num}">
+            <input type="submit" value="삭제">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+      </thead>
+    </table>
+    <form class="inline-block" action="/search">
+      회원아이디 <input type="text" name="id">
+      회원명 <input type="text" name="name">
+      이메일 <input type="text" name="email">
+      <input type="submit" value="검색">
+    </form>
+    <form class="inline-block" action="/list">
+      <input type="submit" value="목록">
+    </form>
+  </div>
+</div>
+</body>
+</html>
