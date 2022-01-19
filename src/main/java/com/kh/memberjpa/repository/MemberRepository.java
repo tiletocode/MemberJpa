@@ -10,3 +10,4 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Integer> {
     public Optional<Member> findByNum(Integer num);
 }
+

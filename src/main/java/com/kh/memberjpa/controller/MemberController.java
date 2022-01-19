@@ -47,7 +47,7 @@ public class MemberController {
     public ModelAndView insertPost(@ModelAttribute @Validated Member member, BindingResult bindingResult, ModelAndView mav) {
         if(bindingResult.hasErrors()) {
             mav.addObject("message", "입력내용을 확인하세요.");
-            mav.setViewName("reg");;
+            mav.setViewName("reg");
             return mav;
         }
         repository.saveAndFlush(member);
